@@ -37,7 +37,7 @@ app.use(cors()).use(cookieParser());
  */
 
 app.get('/login', (req, res) => {
-    res.send('Login');
+    res.render('./pages/login');
 });
 
 /**
