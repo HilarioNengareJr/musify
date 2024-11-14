@@ -15,7 +15,7 @@ Follow these steps to get **Musify** up and running on your local machine.
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/hilarionengarejr/musify.git
+   git clone https://github.com/HilarioNengareJr/musify.git
    cd musify
    ```
 
