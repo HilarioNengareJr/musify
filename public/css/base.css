@@ -1,0 +1,32 @@
+/*-----------------------------------*\
+  #base.css
+\*-----------------------------------*/
+
+/**
+ * copyright 2024 Hilario Junior Nengare
+ */
+
+
+
+ 
+/*-----------------------------------*\
+  #BASE
+\*-----------------------------------*/
+
+html {
+    font-family: var(--font-family);
+    font-size: var(--fs-base);
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+}
+ 
+body {
+    background-color: var(--background);
+    color: var(--on-background);
+    font-size: var(--fs-body-medium);
+    line-height: var(--ln-base);
+    height: 100vh;
+    height: 100dvh; /* fill viewport on mobile */
+}
+
+
