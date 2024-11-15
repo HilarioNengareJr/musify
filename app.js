@@ -33,16 +33,24 @@ app.use(cors()).use(cookieParser());
 
 
 /**
+ * custom modules
+ */
+
+const login = require('./src/routes/login.route');
+const auth = require('./src/routes/auth.route');
+
+/**
  * login page
  */
 
-app.get('/login', (req, res) => {
-    res.render('./pages/login');
-});
+app.use('/login', login);
+
 
 /**
- * 
+ *  auth page
  */
+
+app.use('/auth', auth);
 
 app.listen (5000, () => {
     console.log(`Server listening at http://localhost:5000`);

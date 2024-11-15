@@ -6,7 +6,7 @@
 'use strict';
 
 const login = (req, res) => {
-    res.render('../pages/login');
+    res.render('../views/pages/login');
 };
 
 module.exports = { login };
