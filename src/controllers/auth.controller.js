@@ -3,7 +3,7 @@
  * @copyright Hilario Junior Nengare 2024
  */
 
-'use strict'
+'use strict';
 
 /**
  * node modules
@@ -33,6 +33,29 @@ const auth = (req, res) => {
     }));
 }
 
+
+const callback = async (req, res) => {
+    const MILLISECONDS = 1000;
+    const ONE_WEEK = 604800000;
+
+    const {
+        code = null,
+        state = null,
+        error = null
+    } = req.query;
+
+    const /** {string} */ storedState = req.cookies[apiConfig.STATE_KEY];
+    
+    if (error || !state || state !== storedState){
+        return res.redirect('/login');
+    }else {
+        res.clearCookie(apiConfig.STATE_KEY);
+    }
+
+    console.log(req.query);
+}
+
 module.exports = {
-    auth
+    auth,
+    callback
 }

@@ -45,6 +45,11 @@ const auth = require('./src/routes/auth.route');
 
 app.use('/login', login);
 
+/**
+ * auth page
+ */
+
+app.use('/auth', auth);
 
 /**
  *  auth page
