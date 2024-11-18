@@ -64,7 +64,7 @@ const callback = async (req, res) => {
             } = response.data;
 
             res.cookie('access_token', access_token, { maxAge: expires_in * MILLISECONDS });
-            res.cookie('refresh_token', refresh_token, { maxAge: expires_in * ONE_WEEK });
+            res.cookie('refresh_token', refresh_token, { maxAge: ONE_WEEK });
             res.redirect('/');
         } else {
             res.redirect('/login');
