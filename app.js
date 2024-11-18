@@ -38,6 +38,7 @@ app.use(cors()).use(cookieParser());
 
 const login = require('./src/routes/login.route');
 const auth = require('./src/routes/auth.route');
+const authenticateUser = require('./src/middlewares/auth_user.middleware');
 
 /**
  * login page
@@ -56,6 +57,12 @@ app.use('/auth', auth);
  */
 
 app.use('/auth', auth);
+
+/**
+ *  check user is authenticated
+ */
+
+
 
 app.listen (5000, () => {
     console.log(`Server listening at http://localhost:5000`);
