@@ -17,7 +17,7 @@ const querystring = require('querystring');
 
 const apiConfig = require('../config/api.config');
 const utils = require('../helpers/helper.util');
-
+const { getToken } = require('../api/auth.api');
 
 const auth = (req, res) => {
 
@@ -45,14 +45,33 @@ const callback = async (req, res) => {
     } = req.query;
 
     const /** {string} */ storedState = req.cookies[apiConfig.STATE_KEY];
-    
-    if (error || !state || state !== storedState){
-        return res.redirect('/login');
-    }else {
-        res.clearCookie(apiConfig.STATE_KEY);
-    }
 
-    console.log(req.query);
+    if (error || !state || state !== storedState) {
+        return res.redirect('/login');
+    } else {
+
+        res.clearCookie(apiConfig.STATE_KEY);
+
+        const response = await getToken(code);
+
+        if (response.status === 200) {
+            console.log(response.data);
+
+            const {
+                access_token,
+                refresh_token,
+                expires_in
+            } = response.data;
+
+            res.cookie('access_token', access_token, { maxAge: expires_in * MILLISECONDS });
+            res.cookie('refresh_token', refresh_token, { maxAge: expires_in * ONE_WEEK });
+            res.redirect('/');
+        } else {
+            res.redirect('/login');
+        }
+
+        console.log(req.query);
+    }
 }
 
 module.exports = {
