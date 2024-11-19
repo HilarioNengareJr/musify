@@ -56,20 +56,25 @@ const callback = async (req, res) => {
         try {
             const response = await getToken(code);
 
-            if (response.status === 200) {
-                console.log(response.data);
+            if (response) {
+                if (response.status === 200) {
+                    console.log(response.data);
 
-                const {
-                    access_token,
-                    refresh_token,
-                    expires_in
-                } = response.data;
+                    const {
+                        access_token,
+                        refresh_token,
+                        expires_in
+                    } = response.data;
 
-                res.cookie('access_token', access_token, { maxAge: expires_in * MILLISECONDS });
-                res.cookie('refresh_token', refresh_token, { maxAge: ONE_WEEK });
-                res.redirect('/');
+                    res.cookie('access_token', access_token, { maxAge: expires_in * MILLISECONDS });
+                    res.cookie('refresh_token', refresh_token, { maxAge: ONE_WEEK });
+                    res.redirect('/');
+                } else {
+                    console.error('Token request failed:', response.status, response.data);
+                    res.redirect('/login');
+                }
             } else {
-                console.error('Token request failed:', response.status, response.data);
+                console.error('Token request returned undefined response:', response);
                 res.redirect('/login');
             }
         } catch (err) {
