@@ -39,18 +39,13 @@ app.use(cors()).use(cookieParser());
 const login = require('./src/routes/login.route');
 const auth = require('./src/routes/auth.route');
 const authenticateUser = require('./src/middlewares/auth_user.middleware');
-
+const home = require('./src/routes/home.route');
 /**
  * login page
  */
 
 app.use('/login', login);
 
-/**
- * auth page
- */
-
-app.use('/auth', auth);
 
 /**
  *  auth page
@@ -62,6 +57,13 @@ app.use('/auth', auth);
  *  check user is authenticated
  */
 
+app.use(authenticateUser);
+
+/**
+ *  home page 
+ */
+
+app.use('/', home);
 
 
 app.listen (5000, () => {

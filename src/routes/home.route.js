@@ -3,7 +3,7 @@
  * @copyright Hilario Junior Nengare 2024
  */
 
-'use strict'
+'use strict';
 
 /**
  * node modules
@@ -15,8 +15,9 @@ const router = require('express').Router();
  * custom modules
  */
 
-const { login } = require('../controllers/login.controller');
+const { home } = require('../controllers/home.controller');
 
-router.get('/login', login);
+router.get('/', home);
 
 module.exports = router;
+
