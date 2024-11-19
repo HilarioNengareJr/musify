@@ -41,6 +41,12 @@ const auth = require('./src/routes/auth.route');
 const authenticateUser = require('./src/middlewares/auth_user.middleware');
 const home = require('./src/routes/home.route');
 /**
+ *  home page 
+ */
+
+app.use('/', home);
+
+/**
  * login page
  */
 
@@ -58,12 +64,6 @@ app.use('/auth', auth);
  */
 
 app.use(authenticateUser);
-
-/**
- *  home page 
- */
-
-app.use('/', home);
 
 
 app.listen (5000, () => {
