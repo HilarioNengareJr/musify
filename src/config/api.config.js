@@ -15,7 +15,7 @@ require('dotenv').config();
 const BASE_URL = 'https://api.spotify.com/V1';
 
 // spotify token base address
-const TOKEN_BASE_URL = 'https://accounts.spotify.com/api/token';
+const TOKEN_BASE_URL = 'https://accounts.spotify.com/api';
 
 // spotify client id
 const CLIENT_ID = process.env.CLIENT_ID;
