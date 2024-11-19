@@ -20,7 +20,12 @@ const { refreshToken } = require('../controllers/refresh_token.controller');
 
 router.get('/', auth);
 
-router.get('/callback', callback);
+router.get('/callback', (req, res) => {
+    callback(req, res).catch(err => {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    });
+});
 
 router.get('/refresh_token', refreshToken);
 

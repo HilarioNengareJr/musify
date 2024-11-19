@@ -46,7 +46,7 @@ const callback = async (req, res) => {
 
     const /** {string} */ storedState = req.cookies[apiConfig.STATE_KEY];
 
-    if (error || !state || state !== storedState) {
+    if (error || !state || state !== storedState || !storedState) {
         return res.redirect('/login');
     } else {
 
