@@ -18,7 +18,7 @@ const router = require('express').Router();
 const { auth, callback } = require('../controllers/auth.controller');
 const { refreshToken } = require('../controllers/refresh_token.controller');
 
-router.get('/auth', auth);
+router.get('/', auth);
 
 router.get('/callback', callback);
 
