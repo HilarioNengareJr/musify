@@ -47,26 +47,33 @@ const callback = async (req, res) => {
     const /** {string} */ storedState = req.cookies[apiConfig.STATE_KEY];
 
     if (error || !state || state !== storedState || !storedState) {
+        console.error('State validation failed:', { error, state, storedState });
         return res.redirect('/login');
     } else {
 
         res.clearCookie(apiConfig.STATE_KEY);
 
-        const response = await getToken(code);
+        try {
+            const response = await getToken(code);
 
-        if (response.status === 200) {
-            console.log(response.data);
+            if (response.status === 200) {
+                console.log(response.data);
 
-            const {
-                access_token,
-                refresh_token,
-                expires_in
-            } = response.data;
+                const {
+                    access_token,
+                    refresh_token,
+                    expires_in
+                } = response.data;
 
-            res.cookie('access_token', access_token, { maxAge: expires_in * MILLISECONDS });
-            res.cookie('refresh_token', refresh_token, { maxAge: ONE_WEEK });
-            res.redirect('/');
-        } else {
+                res.cookie('access_token', access_token, { maxAge: expires_in * MILLISECONDS });
+                res.cookie('refresh_token', refresh_token, { maxAge: ONE_WEEK });
+                res.redirect('/');
+            } else {
+                console.error('Token request failed:', response.status, response.data);
+                res.redirect('/login');
+            }
+        } catch (err) {
+            console.error('Error during token request:', err);
             res.redirect('/login');
         }
 
