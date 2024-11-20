@@ -82,7 +82,7 @@ const callback = async (req, res) => {
             res.redirect('/login');
         }
 
-        console.log(req.query);
+        console.log('Callback query:', req.query);
     }
 }
 
