@@ -14,7 +14,7 @@ const axiosConfig = require('../config/axios.config');
 const getRefreshToken = async (refreshToken) => {
     try {
         const response = await axiosConfig.token.post('/token', {
-            grant_typ: 'refresh_token',
+            grant_type: 'refresh_token',
             refresh_token: refreshToken,
 
         })

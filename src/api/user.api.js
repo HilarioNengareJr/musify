@@ -9,9 +9,11 @@
  * custom modules
  */
 
-const {getData} = require('../config/axios.config');
+const { getData } = require('../config/axios.config');
 
 const getProfile = async (req) => {
+
+    console.log("cookie ", req.cookies.access_token);
     const /** {object} */ {data: currentProfile} = await getData('/me', req.cookies.access_token);
 
     return currentProfile;
