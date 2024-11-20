@@ -16,7 +16,17 @@ const querystring = require('querystring');
  * custom modules
  */
 
-const apiConfig = require('./api.config');
+const apiConfig = {
+    CLIENT_ID: 'your_client_id',
+    CLIENT_SECRET: 'your_client_secret',
+    REDIRECT_URI: 'http://localhost:5000/auth/callback', // Ensure this matches the one in Spotify Developer Dashboard
+    SCOPE: 'user-read-private user-read-email',
+    STATE_KEY: 'spotify_auth_state',
+    TOKEN_BASE_URL: 'https://accounts.spotify.com/api',
+    BASE_URL: 'https://api.spotify.com/v1'
+};
+
+module.exports = apiConfig;
 
 
 /**
