@@ -40,3 +40,85 @@
 
 @import url('./typography.css');
 
+
+
+
+/*-----------------------------------*\
+  #REUSED STYLE
+\*-----------------------------------*/
+
+
+:has(> .state-layer) {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.ripple,
+.state-layer {
+  position: absolute;
+  inset: 0;
+  background-color: var(--state-layer-bg);
+  opacity: 0;
+  transition: opacity var(--tr-duration-short-2) var(--tr-easing-linear);
+  z-index: -2;
+}
+
+:has(> .state-layer):is(:focus, :focus-visible, :focus-within, :active)>.state-layer {
+  opacity: 0.12;
+}
+
+:has(> .state-layer):hover>.state-layer {
+  opacity: 0.08;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.page {
+  height: 100vh;
+  height: 100dvh;
+  padding-inline: var(--space-4);
+  padding-block-start: var(--top-bar-height);
+  padding-block-end: calc(var(--bottom-nav-height) + var(--player-sm-height) + var(--space-4));
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.player:has(.player-sm.hide) {
+  padding-block-end: calc(var(--bottom-nav-height) + var(--space-4));
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: var(--surface-container-highest);
+}
+
+.material-symbols-rounded {
+  color: inherit;
+  height: 1em;
+  width: 1em;
+  display: block;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  user-select: none;
+  overflow: hidden;
+}

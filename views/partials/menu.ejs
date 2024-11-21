@@ -1,0 +1,23 @@
+<div class="menu">
+    <a href="/me" class="menu-item" data-ripple>
+        <span class="label-large">
+            Profile
+        </span>
+
+        <div class="state-layer"></div>
+    </a>
+    <a href="/logout" class="menu-item" data-ripple>
+        <span class="label-large">
+            Logout
+        </span>
+
+        <div class="state-layer"></div>
+    </a>
+    
+
+    <%- include('./icon_btn'), {
+        variant: 'clear',
+        icon: 'close',
+        dataAttr: 'data-search-clear'
+    } %>
+</div>
