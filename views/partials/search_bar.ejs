@@ -16,15 +16,17 @@
       name="query"
       id="search"
       placeholder="What do you want to listen to?"
-      value="<%=locals.query%>"
+      value="<%= locals.query %>"
       class="search-field body-large"
       required
       data-search-field
     />
   </form>
 
-  <% const { url = '/images/avatar.png', width = 30, height = 30 } =
-  locals.images.find(item => item.width === 64) || {} %>
+  <% const image = locals.images ? locals.images.find(item => item.width === 64) : null; %>
+  <% const url = image ? image.url : '/images/avatar.png'; %>
+  <% const width = image ? image.width : 30; %>
+  <% const height = image ? image.height : 30; %>
 
   <div class="menu-wrapper" data-menu-wrapper>
     <button
@@ -34,16 +36,16 @@
       data-menu-toggler
     >
       <img
-        src="<%=url%>"
-        alt="<%=locals.display_name%> Profile"
-        width="<%=width%>"
-        height="<%=height%>"
+        src="<%= url %>"
+        alt="<%= locals.display_name %> Profile"
+        width="<%= width %>"
+        height="<%= height %>"
         class="avatar"
       />
-
       <div class="state-layer"></div>
     </button>
 
     <%- include('./menu') %>
+    
   </div>
 </div>

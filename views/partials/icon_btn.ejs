@@ -1,7 +1,11 @@
-<button class="icon-btn <%=locals.variant%>" <%-locals.dataAttr%> data-ripple>
+<button 
+  class="icon-btn <%= locals.variant %> <%= locals.disabled ? 'disabled' : '' %>" 
+  <%- locals.dataAttr %> 
+  data-ripple 
+  <%= locals.disabled ? 'disabled' : '' %>
+>
     <span class="material-symbols-rounded icon">
-        <%=locals.icon%>
+        <%= locals.icon %>
     </span>
-
     <div class="state-layer"></div>
 </button>
