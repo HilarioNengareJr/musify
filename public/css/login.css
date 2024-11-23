@@ -68,7 +68,7 @@
     transition: opacity var(--tr-duration-short-2) var(--tr-easing-linear);
 }
 
-:has(> .state-layer):is(:focus, :focus-visible, :focus-within, :active)>.state-layer {
+:has(> .state-layer):is(:focus, :focus-visible, :focus-within, :active)> .state-layer {
     opacity: 0.12;
 }
 

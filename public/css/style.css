@@ -86,6 +86,26 @@
   border-width: 0;
 }
 
+.ripple{
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  transform-origin: center;
+  border-radius: var(--radius-full);
+  opacity: 0.12;
+  filter: blur(20px);
+  animation: riple 500ms var(--tr-easing-standard) forwards;
+}
+
+@keyframes ripple {
+  0% {
+    scale: 0;
+  }
+  100% {
+    scale: 2.5;
+  }
+}
+
 .page {
   height: 100vh;
   height: 100dvh;
@@ -301,7 +321,7 @@ search-bar:not(.search-bar:has(.search-field:not(:placeholder-shown))) .clear {
   transition: var(--tr-duration-short-4) var(--tr-easing-emphasized);
 }
 
-.menu-wrapper.active menu {
+.menu-wrapper.active .menu {
   transform: scale(1);
   opacity: 1;
   visibility: visible;
@@ -342,3 +362,96 @@ search-bar:not(.search-bar:has(.search-field:not(:placeholder-shown))) .clear {
   display: none;
 }
 
+/**
+* Bottom Nav
+*/
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--bottom-nav-height);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2);
+  background-color: var(--surface-container);
+  box-shadow: var(--shadow-1);
+  z-index: 4;
+}
+
+.bottom-nav .logo {
+  display: none;
+}
+
+.bottom-nav-item {
+  padding-block: var(--space-3) var(--space-4);
+  padding-inline: var(--space-4);
+  text-align: center;
+  color: var(--on-surface-variant);
+}
+
+.bottom-nav-item .icon-wrapper {
+  width: 64px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  margin-inline: auto;
+  margin-block: var(--space-1);
+  overflow: hidden;
+  border-radius: var(--radius-full);
+  color: var(--on-surface);
+  --state-layer-bg: var(--on-surface);
+}
+
+.bottom-nav-item:hover .state-layer {
+  opacity: 0.08;
+}
+
+.bottom-nav-item:is(:focus, :focus-visible, :focus-within).state-layer {
+  opacity: 0.12;
+}
+
+.bottom-nav-item:active .state-layer {
+  opacity: 0.16;
+}
+
+.bottom-nav-item.active .icon-wrapper {
+  color: var(--on-secondary-container);
+  --state-layer-bg: var(--on-secondary-container);
+}
+
+.bottom-nav-item .icon {
+  transition: var(--tr-duration-short-4) var(--tr-duration-short-2);
+}
+
+.bottom-nav-item:hover .icon {
+  font-variation-settings: 'GRAD' 200;
+}
+
+.bottom-nav-item:active .icon {
+  font-variation-settings: 'GRAD' 0;
+}
+
+.bottom-nav-item.active .icon {
+  font-variation-settings: 'FILL' 1;
+}
+
+.bottom-nav-item .indicator {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  transform: translateX(-50%);
+  background-color: var(--secondary-container);
+  border-radius: var(--radius-full);
+  opacity: 0;
+  z-index: -1;
+  transition: var(--tr-duration-short-4) var(--tr-easing-standard);
+}
+
+.bottom-nav-item.active .indicator {
+  opacity: 1;
+  width: 100%;
+}

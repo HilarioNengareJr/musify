@@ -1,0 +1,53 @@
+<% 
+const navItems = [
+    {
+        href: '/',
+        icon: 'home',
+        text: 'Home'
+    }, 
+    {
+        href: '/explore',
+        icon: 'explore',
+        text: 'Explore'
+    },
+    {
+        href: '/album',
+        icon: 'album',
+        text: 'Albums'
+    },
+    {
+        href: '/playlist',
+        icon: 'queue_music',
+        text: 'Playlists'
+    }
+];
+%>
+
+<nav class="bottom-nav">
+    <a href="/" class="logo bottom-nav-item">
+        <div class="icon-wrapper">
+            <img src="/images/favicon.svg" alt="Musify Logo" width="24" height="24" class="small">
+            <img src="/images/logo.svg" alt="Musify Logo" width="94" height="24" class="large">
+        </div>
+        <p class="bottom-nav-text label-medium">
+            Musify
+        </p>
+    </a>
+
+    <% navItems.forEach(({href, icon, text}) => { %>
+        <a href="<%=href%>" class="bottom-nav-item <%=locals.currentRoute===href ? 'active' : ''%>" data-bottom-nav-item>
+            <div class="icon-wrapper">
+                <span class="material-symbols-rounded icon">
+                    <%=icon%>
+                </span>
+
+                <div class="indicator"></div>
+                <div class="state-layer"></div>
+            </div>
+
+            <span class="bottom-nav-text label-medium">
+                <%=icon%>
+            </span>
+        </a>
+    <% }); %>
+</nav>
