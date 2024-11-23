@@ -6,8 +6,7 @@
   <body>
     <article class="page custom-scrollbar" data-page>
       <!-- TOP APP BAR -->
-      <%- include('../partials/top_bar', { currentProfile: locals.currentProfile
-      }) %>
+      <%- include('../partials/top_bar', { currentProfile: locals.currentProfile}) %>
 
       <!-- BOTTOM NAV -->
       <%- include('../partials/bottom_nav', { currentRoute: '/'}) %>
@@ -24,8 +23,16 @@
             <div class="slider-inner">
                 <% locals.recommendedAlbums.forEach(({album : { artists, images, name: title, id, uri}}) => { %>
                     <% 
-                        console.log(artists)
+                        const text = artists.map(({name}) => name).join(',');
+                        const image = images.find(item=>item.width === 300);
                     %>
+                    <%- include('../partials/card', {
+                      image,
+                      type: 'album',
+                      title,
+                      text,
+                      link: `/album/${id}
+                    })  %>
                 <% }) %>
             </div>
           </div>
