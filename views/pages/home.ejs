@@ -13,7 +13,7 @@
 
       <div class="main" data-main>
         <!-- RECOMMENDED ALBUMS -->
-        <% if (locals.recommendedALbums.length) {%>
+        <% if (locals.recommendedAlbums.length) {%>
         <section class="section new-release">
           <div class="title-wrapper">
             <h2 class="title-large section-title">Recommended for you</h2>
@@ -21,19 +21,19 @@
 
           <div class="slider" data-slider>
             <div class="slider-inner">
-                <% locals.recommendedAlbums.forEach(({album : { artists, images, name: title, id, uri}}) => { %>
-                    <% 
-                        const text = artists.map(({name}) => name).join(',');
-                        const image = images.find(item=>item.width === 300);
-                    %>
-                    <%- include('../partials/card', {
-                      image,
-                      type: 'album',
-                      title,
-                      text,
-                      link: `/album/${id}
-                    })  %>
-                <% }) %>
+              <% locals.recommendedAlbums.forEach(({album : { artists, images, name: title, id, uri}}) => { %>
+                <% 
+                    const text = artists.map(({name}) => name).join(',');
+                    const image = images.find(item => item.width === 300);
+                %>
+                <%- include('../partials/card', { 
+                    image, 
+                    type: 'album', 
+                    title, 
+                    text, 
+                    link: `/album/${id}` 
+                }) %>
+            <% }) %>            
             </div>
           </div>
         </section>

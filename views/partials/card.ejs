@@ -1,7 +1,20 @@
 <%
 const { 
-    url = `/images/${locals.type}`
+    url = `/images/${locals.type}-banner.png`,
+    width = 300,
+    height = 300
 } = locals.image ?? {}
 %>
 
+<div class="card <%=locals.variant%>" title="<%=locals.title%>" data-ripple>
+    <div class="card-banner">
+        <figure class="img-holder">
+            <img src="<%=url%>" width="<%=width%>" height="<%=height%>" alt="<%=locals.title%>" class="img-cover" data-image-load-anim>
+        </figure>
 
+        <%- include('./play_btn', {
+            variant: 'filled',
+            dataAttr: `data-uri="${locals.uri}"`
+        })%>
+    </div>
+</div>
