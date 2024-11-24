@@ -18,9 +18,6 @@ Musify is a web application that allows users to stream music, create playlists,
 
 - **Frontend**: HTML5, CSS3, EJS
 - **Backend**: Node.js, Express.js
-- **Database**: MongoDB (or any other database you are using)
-- **Authentication**: Passport.js
-- **Styling**: Material Design (or any other styling framework you are using)
 
 ## 🚀 Installation
 
@@ -56,13 +53,7 @@ Follow these steps to get **Musify** up and running on your local machine.
    npm start
    ```
 
-2. **Open your browser** and navigate to `http://localhost:3000` to access the application.
+2. **Open your browser** and navigate to `http://localhost:5000` to access the application.
 
-## 🤝 Contributing
 
-Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) to get started.
-
-## 📄 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
