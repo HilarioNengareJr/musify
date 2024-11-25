@@ -22,11 +22,11 @@ const {
             <%=locals.title%>
         </h3>
         <p class="body-medium card-text has-seperator">
-            <% if {locals.year} {%>
+            <% if (locals.year) { %>
                 <span><%=locals.year%></span>
                 <div class="seperator"></div>
-                <% } %>
-                <%=locals.text%>
+            <% } %>
+            <%=locals.text%>
         </p>
     </div>
 
