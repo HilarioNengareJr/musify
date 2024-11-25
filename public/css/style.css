@@ -205,7 +205,10 @@
   font-variation-settings:'FILL' 1;
 }
 
-
+.play-btn.active .play-icon, 
+.play-btn:not(.active) .pause-icon{
+  display: none;
+}
 
 
 /*-----------------------------------*\
