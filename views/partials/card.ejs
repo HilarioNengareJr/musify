@@ -17,4 +17,19 @@ const {
             dataAttr: `data-uri="${locals.uri}"`
         })%>
     </div>
+    <div class="card-content">
+        <h3 class="title-medium card-title">
+            <%=locals.title%>
+        </h3>
+        <p class="body-medium card-text has-seperator">
+            <% if {locals.year} {%>
+                <span><%=locals.year%></span>
+                <div class="seperator"></div>
+                <% } %>
+                <%=locals.text%>
+        </p>
+    </div>
+
+    <a href="<%=locals.link%>" class="card-link" aria-label="<%=locals.title%>"></a>
+    <div class="state-layer"></div>
 </div>
