@@ -9,7 +9,7 @@ const {
 <div class="card <%=locals.variant%>" title="<%=locals.title%>" data-ripple>
     <div class="card-banner">
         <figure class="img-holder">
-            <img src="<%=url%>" width="<%=width%>" height="<%=height%>" alt="<%=locals.title%>" class="img-cover" data-image-load-anim>
+            <img src="<%=url%>" width="<%=width%>" height="<%=height%>" alt="<%=locals.title%>" class="img-cover" data-image-load-anim loading="lazy">
         </figure>
 
         <%- include('./play_btn', {
@@ -18,10 +18,10 @@ const {
         })%>
     </div>
     <div class="card-content">
-        <h3 class="title-medium card-title">
+        <h3 class="title-medium card-title ellipsis-one-line">
             <%=locals.title%>
         </h3>
-        <p class="body-medium card-text has-seperator">
+        <p class="body-medium card-text has-seperator ellipsis-two-line">
             <% if (locals.year) { %>
                 <span><%=locals.year%></span>
                 <div class="seperator"></div>

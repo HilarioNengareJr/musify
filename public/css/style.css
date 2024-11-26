@@ -167,8 +167,9 @@
 
 .slider-inner {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: var(--space-2);
+  min-width: max-content;
 }
 
 .slider .card {
@@ -210,6 +211,19 @@
   display: none;
 }
 
+.ellipsis-one-line{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.ellipsis-two-line{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 
 /*-----------------------------------*\
   #COMPONENTS
@@ -518,7 +532,61 @@ search-bar:not(.search-bar:has(.search-field:not(:placeholder-shown))) .clear {
   transition: var(--tr-duration-short-4) var(--tr-easing-standard);
 }
 
-.bottom-nav-item.active .indicator {
+.bottom-nav-item.active .indicator { 
   opacity: 1;
   width: 100%;
 }
+
+
+/**
+* Card
+*/
+
+.card {
+  position: relative;
+  background-color: var(--surface-container-highest);
+  border-radius: var(--radius-medium);
+  --state-layer-bg: var(--on-surface);
+  overflow: hidden;
+}
+
+.card-link {
+  position: absolute;
+  inset: 0;
+}
+
+.card-banner {
+  position: relative;
+}
+
+.card-banner .img-holder {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-medium);
+}
+
+.card .play-btn {
+  bottom: 16px;
+  right: 16px;
+  transform: translateY(16px);
+}
+
+.card:where(:hover, :focus-visible, :has(.play-btn.active)) .play-btn {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.card-content {
+  padding: var(--space-4);
+}
+
+.card-title {
+  color: var(--on-surface);
+  margin-block-end: var(--space-1);
+}
+
+.card-text {
+  color: var(--on-surface);
+  opacity: 0.8;
+}
+

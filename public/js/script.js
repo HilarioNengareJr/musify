@@ -5,6 +5,7 @@
 
 'use strict';
 
+import addEventOnElems from './utils';
 
 /**
  * Search clear functionality
@@ -101,3 +102,43 @@ const ripple = function($rippleElem){
 const /** {HTMLElement} */ $rippleElems = document.querySelectorAll('[data-ripple]');
 $rippleElems?.forEach(item => ripple(item));
 
+
+/**
+ * Image Animation On Loading
+ */
+window.addEventListener('DOMContentLoaded', function(){
+    const /** {Array<HTMLElement>} */ $animatedImages = this.document.querySelectorAll('[data-image-load-anim]');
+    const addAnimation = function (){
+        this.animate({
+            opacity: 1
+        }, {
+            duration: 200,
+            fill: 'forwards'
+        });
+    }
+
+    $animatedImages.forEach($image => {
+        $animatedImages.style.opacity = 0;
+
+        if($image.complete){
+            addAnimation.call($image);
+        }else{
+            $image.addEventListener('load', addAnimation);
+        }
+    });
+});
+
+/**
+ * Bottom Nav Item Active
+ */
+
+const /** {<Array<HTMLElement} */ $bottomNavItems = document.querySelectorAll('[data-bottom-nav-item]');
+
+const /** (HTMLElement) */ $activeBottomNavItem = document.querySelector('[data-bottom-nav-item].active');
+
+const activeNavItem = function () {
+    $activeBottomNavItem?.classList.remove('active');
+    this.classList.add('active');
+}
+
+$bottomNavItems && addEventOnElems($bottomNavItems, 'click', activeNavItem);
