@@ -18,16 +18,16 @@ const BASE_URL = 'https://api.spotify.com/v1';
 const TOKEN_BASE_URL = 'https://accounts.spotify.com/api';
 
 // spotify client id
-const CLIENT_ID = "b5e16e315adc4ed5a58b2d4b7d923bd0";
+const CLIENT_ID = process.env.CLIENT_ID;
 
 // spotifY client secret
-const CLIENT_SECRET = "0aea667f704847d3b92b6f26ab94718d";
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
 // spotify redirect URI for authorization code flow
-const REDIRECT_URI = "http://localhost:5000/auth/callback";
+const REDIRECT_URI = process.env.REDIRECT_URI;
 
 // scope of spotify api request
-const SCOPE = "user-read-playback-state user-modify-playback-state user-read-currently-playing playlist-read-private playlist-modify-private playlist-modify-public user-read-email user-read-private";
+const SCOPE = process.env.SCOPE;
 
 // authentication state key
 const STATE_KEY = 'spotify_auth_state';
