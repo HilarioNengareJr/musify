@@ -16,7 +16,13 @@ const apiConfig = require('../config/api.config');
 const { getAdapter } = require('axios');
 
 const getRecentlyPlayed = async (req, itemLimit = apiConfig.DEFAULT_LIMIT) => {
-    const { data: getRecentlyPlayed } = await getData(`/me/player/recently-played?limit=${itemLimit}`, req.cookies.access_token);
+    try {
+        const { data: getRecentlyPlayed } = await getData(`/me/player/recently-played?limit=${itemLimit}`, req.cookies.access_token);
+        return getRecentlyPlayed;
+    } catch (err) {
+        console.error('Error fetching recently played tracks:', err.response ? err.response.data : err.message);
+        throw err;
+    }
 
     return getRecentlyPlayed;
 
