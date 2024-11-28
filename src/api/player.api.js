@@ -23,6 +23,7 @@ const apiConfig = require('../config/api.config');
 
 const getRecentlyPlayed = async (req, itemLimit = apiConfig.DEFAULT_LIMIT) => {
     const {data: recentlyPlayed} = await getData(`/me/player/recently-played?limit=${itemLimit}`, req.cookies.access_token);
+    console.log('Recently Played Data:', JSON.stringify(recentlyPlayed, null, 2));
     return recentlyPlayed;
 }
 
