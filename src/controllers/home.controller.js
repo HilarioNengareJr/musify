@@ -21,13 +21,8 @@ const home = async (req, res) => {
     const currentProfile = await userApi.getProfile(req);
 
     // recently played 
-    let recentlyPlayed = { items: [] };
-    try {
-        recentlyPlayed = await playerApi.getRecentlyPlayed(req);
-    } catch (error) {
-        console.error('Error fetching recently played tracks:', error.message);
-    }
-    const recentlyPlayedTracks = (recentlyPlayed.items || []).map(item => item.track);
+    const recentlyPlayed = await playerApi.getRecentlyPlayed(req);
+    const recentlyPlayedTracks = recentlyPlayed.items.map(({ track }) => track);
     
     // recommended albums
     const trackIds = recentlyPlayedTracks.map(({id}) => id);
@@ -43,7 +38,7 @@ const home = async (req, res) => {
     console.log('recommendedArtists');
     res.render('./pages/home', {
         currentProfile,
-        recentlyPlayedTracks: recentlyPlayedTracks.map(track => track.toString()),
+        // recentlyPlayedTracks,
         recommendedAlbums,
         recommendedArtists
     });
