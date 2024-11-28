@@ -1,5 +1,4 @@
-<% // recommended artists const { artists: recommendedArtistItems } =
-locals.recommendedArtists; %>
+<% const { artists: recommendedArtistItems } = locals.recommendedArtists; %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,8 +7,7 @@ locals.recommendedArtists; %>
   <body>
     <article class="page custom-scrollbar" data-page>
       <!-- TOP APP BAR -->
-      <%- include('../partials/top_bar', { currentProfile:
-      locals.currentProfile}) %>
+      <%- include('../partials/top_bar', { currentProfile: locals.currentProfile}) %>
 
       <!-- BOTTOM NAV -->
       <%- include('../partials/bottom_nav', { currentRoute: '/'}) %>
@@ -24,12 +22,11 @@ locals.recommendedArtists; %>
 
           <div class="slider">
             <div class="slider-inner">
-              <% locals.recommendedAlbums.forEach(({album : { artists, images,
-              name: title, id, uri}}) => { %> <% const text =
-              artists.map(({name}) => name).join(','); const image =
-              images.find(item => item.width === 300); %> <%-
-              include('../partials/card', { image, type: 'album', title, text,
-              link: `/album/${id}` }) %> <% }) %>
+              <% locals.recommendedAlbums.forEach(({album : { artists, images, name: title, id, uri}}) => { %>
+                <% const text = artists.map(({name}) => name).join(',');
+                   const image = images.find(item => item.width === 300); %>
+                <%- include('../partials/card', { image, type: 'album', title, text, link: `/album/${id}` }) %>
+              <% }) %>
             </div>
           </div>
         </section>
@@ -37,7 +34,6 @@ locals.recommendedArtists; %>
 
         <!-- RECOMMENDED ARTISTS -->
         <% if (recommendedArtistItems.length){ %>
-
         <section class="section new-release">
           <div class="title-wrapper">
             <h2 class="title-large section-title">Artist for you</h2>
@@ -45,11 +41,21 @@ locals.recommendedArtists; %>
 
           <div class="slider">
             <div class="slider-inner">
-               <!-- To Do -->
+              <% recommendedArtistItems.forEach(({ name: title, type, images, id, uri }) => { %>
+                <% const [image] = images || [] %>
+                <%- include('../partials/card', { 
+                  variant: 'artist-card',
+                  title,
+                  image,
+                  type,
+                  text: type,
+                  link: `/artist/${id}`,
+                  uri
+                }) %>
+              <% }) %>
             </div>
           </div>
         </section>
-
         <% } %>
       </div>
     </article>

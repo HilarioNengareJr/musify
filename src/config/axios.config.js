@@ -34,10 +34,29 @@ const getData = async (apiUrl, access_token) => {
                 'Authorization': `Bearer ${access_token}`
             }
         });
-        return response;
+        return response.data;
     } catch (err) {
-        console.error('Error fetching data:', err);
-        throw new Error('Failed to fetch data from the API');
+        if (err.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.error('Error data:', err.response.data);
+            console.error('Error status:', err.response.status);
+            console.error('Error headers:', err.response.headers);
+
+            if (err.response.status === 404) {
+                throw new Error('The requested resource was not found.');
+            } else {
+                throw new Error('Failed to fetch data from the API');
+            }
+        } else if (err.request) {
+            // The request was made but no response was received
+            console.error('No response received:', err.request);
+            throw new Error('No response received from the API');
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.error('Error setting up the request:', err.message);
+            throw new Error('Error setting up the request');
+        }
     }
 };
 
