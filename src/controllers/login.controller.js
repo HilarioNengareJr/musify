@@ -15,7 +15,7 @@ const login = (req, res) => {
     }
 
 
-    res.render('../views/pages/login');
+    res.render('./pages/login');
 };
 
 module.exports = { login };
