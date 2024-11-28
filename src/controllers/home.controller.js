@@ -20,12 +20,12 @@ const home = async (req, res) => {
         const currentProfile = await userApi.getProfile(req);
 
         // recently played
-        let recentlyPlayed;
+        let recentlyPlayed = { items: [] };
         try {
             recentlyPlayed = await playerApi.getRecentlyPlayed(req);
         } catch (error) {
             console.error('Error fetching recently played tracks:', error.message);
-            recentlyPlayed = { items: [] }; }
+        }
 
         const recentlyPlayedTracks = recentlyPlayed.items.map(({ track }) => track);
 
