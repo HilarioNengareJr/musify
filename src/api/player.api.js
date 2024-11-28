@@ -39,8 +39,13 @@ const getRecentlyPlayed = async (req, itemLimit = apiConfig.DEFAULT_LIMIT) => {
                 return recentlyPlayed;
             }
         }
-        console.error('Error fetching recently played data:', error.message);
-        throw error;
+        if (error.response && error.response.status === 404) {
+            console.error('The requested resource was not found:', error.message);
+            throw new Error('The requested resource was not found.');
+        } else {
+            console.error('Error fetching recently played data:', error.message);
+            throw error;
+        }
     }
 }
 
