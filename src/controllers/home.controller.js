@@ -21,8 +21,8 @@ const home = async (req, res) => {
         const currentProfile = await userApi.getProfile(req);
 
         // recently played 
-        const recentlyPlayed = await playerApi.getRecentlyPlayed(req);
-        const recentlyPlayedTracks = recentlyPlayed.items.map(({ track }) => track);
+        const recentlyPlayed = await playerApi.getRecentlyPlayed(req) || {};
+        const recentlyPlayedTracks = (recentlyPlayed.items || []).map(({ track }) => track);
         
         // recommended albums
         const trackIds = recentlyPlayedTracks.map(({id}) => id);
