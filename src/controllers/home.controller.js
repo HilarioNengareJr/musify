@@ -27,7 +27,7 @@ const home = async (req, res) => {
     } catch (error) {
         console.error('Error fetching recently played tracks:', error.message);
     }
-    const recentlyPlayedTracks = (recentlyPlayed.items || []).map(({ track }) => track);
+    const recentlyPlayedTracks = (recentlyPlayed.items || []).map(item => item.track);
     
     // recommended albums
     const trackIds = recentlyPlayedTracks.map(({id}) => id);
