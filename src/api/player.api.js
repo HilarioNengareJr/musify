@@ -9,7 +9,7 @@
  * custom modules
  */
 
-const { getData } = require('../config/axios.config');
+const { getData, getRefreshToken } = require('../config/axios.config');
 
 
 const apiConfig = require('../config/api.config');
