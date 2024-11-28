@@ -21,19 +21,19 @@ const home = async (req, res) => {
     const currentProfile = await userApi.getProfile(req);
 
     // recently played 
-    // let recentlyPlayed = { items: [] };
-    // try {
-    //     recentlyPlayed = await playerApi.getRecentlyPlayed(req);
-    // } catch (error) {
-    //     console.error('Error fetching recently played tracks:', error.message);
-    // }
-    // const recentlyPlayedTracks = (recentlyPlayed.items || []).map(item => item.track);
+    let recentlyPlayed = { items: [] };
+    try {
+        recentlyPlayed = await playerApi.getRecentlyPlayed(req);
+    } catch (error) {
+        console.error('Error fetching recently played tracks:', error.message);
+    }
+    const recentlyPlayedTracks = (recentlyPlayed.items || []).map(item => item.track);
     
     // recommended albums
-    // const trackIds = recentlyPlayedTracks.map(({id}) => id);
-    // const trackSeed = trackIds.slice(0, 5).join(',');
-    // const recommendedAlbums = await trackApi.getRecommendedTrack(req, trackSeed, apiConfig.LOW_LIMIT);
-    // console.log(recommendedAlbums);
+    const trackIds = recentlyPlayedTracks.map(({id}) => id);
+    const trackSeed = trackIds.slice(0, 5).join(',');
+    const recommendedAlbums = await trackApi.getRecommendedTrack(req, trackSeed, apiConfig.LOW_LIMIT);
+    console.log(recommendedAlbums);
 
     // recommended artists
     const artistIdEntries = recommendedAlbums.map(track => track.artists.map(artist => artist.id));
@@ -43,7 +43,7 @@ const home = async (req, res) => {
     console.log('recommendedArtists');
     res.render('./pages/home', {
         currentProfile,
-        // recentlyPlayedTracks: recentlyPlayedTracks.map(track => track.toString()),
+        recentlyPlayedTracks: recentlyPlayedTracks.map(track => track.toString()),
         recommendedAlbums,
         recommendedArtists
     });
