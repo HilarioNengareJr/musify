@@ -43,8 +43,17 @@ const home = async (req, res) => {
             recommendedArtists
         });
     } catch (error) {
-        console.error('Error in home controller:', error.message);
-        res.status(500).send('Internal Server Error');
+        if (error.message === 'The requested resource was not found.') {
+            console.error('404 Error in home controller:', error.message);
+            res.render('./pages/home', {
+                currentProfile,
+                recommendedAlbums,
+                recommendedArtists
+            });
+        } else {
+            console.error('Error in home controller:', error.message);
+            res.status(500).send('Internal Server Error');
+        }
     }
 }
 
