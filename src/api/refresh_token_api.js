@@ -16,7 +16,6 @@ const getRefreshToken = async (refreshToken) => {
         const response = await axiosConfig.token.post('/token', {
             grant_type: 'refresh_token',
             refresh_token: refreshToken,
-
         })
 
         return response;

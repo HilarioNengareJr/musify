@@ -16,45 +16,32 @@ const trackApi = require('../api/track.api');
 const artistApi =  require('../api/artist.api');
 
 const home = async (req, res) => {
-    try {
-        // current user profile
-        const currentProfile = await userApi.getProfile(req);
 
-        // recently played 
-        const recentlyPlayed = await playerApi.getRecentlyPlayed(req) || {};
-        const recentlyPlayedTracks = (recentlyPlayed.items || []).map(({ track }) => track);
-        
-        // recommended albums
-        const trackIds = recentlyPlayedTracks.map(({id}) => id);
-        const trackSeed = trackIds.slice(0, 5).join(',');
-        const recommendedAlbums = await trackApi.getRecommendedTrack(req, trackSeed, apiConfig.LOW_LIMIT);
-        console.log(recommendedAlbums);
+    // current user profile
+    const currentProfile = await userApi.getProfile(req);
 
-        // recommended artists
-        const artistIdEntries = recommendedAlbums.map(track => track.artists.map(artist => artist.id));
-        const uniqueArtistIds = [...new Set(artistIdEntries.flat(1))].join(',');
-        const recommendedArtists = await artistApi.getSeveralDetail(req, uniqueArtistIds);
-        
-        console.log('recommendedArtists');
-        res.render('./pages/home', {
-            currentProfile,
-            // recentlyPlayedTracks,
-            recommendedAlbums,
-            recommendedArtists
-        });
-    } catch (error) {
-        if (error.message === 'The requested resource was not found.') {
-            console.error('404 Error in home controller:', error.message);
-            res.render('./pages/home', {
-                currentProfile,
-                recommendedAlbums,
-                recommendedArtists
-            });
-        } else {
-            console.error('Error in home controller:', error.message);
-            res.status(500).send('Internal Server Error');
-        }
-    }
+    // recently played 
+    const recentlyPlayed = await playerApi.getRecentlyPlayed();
+    const recentlyPlayedTracks = recentlyPlayed.items.map(({ track }) => track);
+    
+    // recommended albums
+    const trackIds = recentlyPlayedTracks.map(({id}) => id);
+    const trackSeed = trackIds.slice(0, 5).join(',');
+    const recommendedAlbums = await trackApi.getRecommendedTrack(req, trackSeed, apiConfig.LOW_LIMIT);
+    console.log(recommendedAlbums);
+
+    // recommended artists
+    const artistIdEntries = recommendedAlbums.map(track => track.artists.map(artist => artist.id));
+    const uniqueArtistIds = [...new Set(artistIdEntries.flat(1))].join(',');
+    const recommendedArtists = await artistApi.getSeveralDetail(req, uniqueArtistIds);
+    
+    console.log('recommendedArtists');
+    res.render('./pages/home', {
+        currentProfile,
+        // recentlyPlayedTracks,
+        recommendedAlbums,
+        recommendedArtists
+    });
 }
 
 module.exports = { home }
